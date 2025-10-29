@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bucin Animasi — For Fun</title>
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#ff6b81;--accent2:#ffb4c6;--glass:rgba(255,255,255,0.06)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#071021 0%, #081229 50%, #071020 100%);color:#eef2ff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+
+    .card{width:100%;max-width:920px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:18px;padding:28px;box-shadow:0 8px 30px rgba(2,6,23,0.6);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+
+    .head{display:flex;gap:18px;align-items:center}
+    .avatar{width:96px;height:96px;border-radius:16px;overflow:hidden;flex:0 0 96px;border:4px solid rgba(255,255,255,0.04);background:linear-gradient(135deg,var(--accent),var(--accent2));position:relative;transition:0.5s;opacity:1;transition:opacity 0.8s ease}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+
+    .title{flex:1}
+    h1{margin:0;font-size:20px;letter-spacing:0.2px}
+    p.lead{margin:6px 0 0;color:rgba(255,255,255,0.75)}
+
+    .avatar::after{content:'';position:absolute;inset:0;border-radius:12px;box-shadow:0 0 30px rgba(255,107,129,0.12);pointer-events:none;animation:glow 3s ease-in-out infinite}
+    @keyframes glow{0%{transform:scale(1);opacity:0.6}50%{transform:scale(1.06);opacity:1}100%{transform:scale(1);opacity:0.6}}
+
+    .row{display:flex;gap:20px;margin-top:18px;align-items:flex-start}
+    .left{flex:1}
+    .right{width:260px}
+
+    .bubble{background:var(--glass);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);backdrop-filter:blur(4px)}
+    .bubble p{margin:0 0 8px}
+
+    .hearts{position:absolute;right:18px;top:18px;pointer-events:none}
+    .heart{width:22px;height:22px;display:inline-block;margin-left:6px;transform-origin:center;opacity:0}
+    .heart svg{width:100%;height:100%;filter:drop-shadow(0 6px 14px rgba(255,90,110,0.18))}
+    @keyframes floatUp{0%{transform:translateY(0) scale(0.8);opacity:0}10%{opacity:1}60%{transform:translateY(-60px) scale(1.05)}100%{transform:translateY(-140px) scale(1);opacity:0}}
+
+    .controls{display:flex;gap:10px;margin-top:12px}
+    button{background:linear-gradient(90deg,var(--accent),var(--accent2));border:0;padding:10px 14px;border-radius:10px;color:#071020;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(255,98,120,0.12)}
+    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--accent2);box-shadow:none}
+
+    .float-bg{position:absolute;left:-40px;bottom:-40px;pointer-events:none}
+    .float-bg svg{opacity:0.06}
+
+    @media (max-width:720px){.row{flex-direction:column}.right{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <div class="head">
+      <div class="avatar" id="avatar">
+        <img src="https://drive.google.com/uc?export=view&id=1ywj5W3qwyMeLEn5bjNN5LUUvNGOqQJ68" alt="Foto Bucin">
+      </div>
+      <div class="title">
+        <h1>paket bucin — animasi slider</h1>
+        <p class="lead">Animasi imut, slider foto, dan hearts interaktif. Klik tombol ❤️ untuk melempar bucin!</p>
+      </div>
+      <div class="hearts" id="hearts"></div>
+    </div>
+
+    <div class="row">
+      <div class="left">
+        <div class="bubble">
+          <p>Hai sayang 😘 — ini cuma template HTML lucu. Kamu bisa ganti teks dan animasinya sesuka hati.</p>
+          <div class="controls">
+            <button id="btn-love">❤️ Lempar Bucin</button>
+            <button id="btn-music">🎧 Putar Reff Dulu, Sayang~</button>
+            <button class="ghost" id="btn-next">📸 Ganti Foto</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div style="border-radius:14px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:56px;height:56px;border-radius:10px;overflow:hidden;flex:0 0 56px;border:3px solid rgba(255,255,255,0.03)"><img id="mini" src="https://drive.google.com/uc?export=view&id=1ywj5W3qwyMeLEn5bjNN5LUUvNGOqQJ68" style="width:100%;height:100%;object-fit:cover" alt="mini"></div>
+            <div>
+              <div style="font-weight:700">Status: Bucin Mode</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.65)">Handled with ❤️ and CSS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="float-bg" aria-hidden="true">
+      <svg width="420" height="420" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(20,20)">
+          <path d="M50 15c8-10 25-10 34 0 9 10 9 27 0 37l-24 26-24-26c-9-10-9-27 0-37z" fill="#FF6B81"/>
+          <path d="M110 80c6-8 18-8 24 0 6 8 6 20 0 28l-16 17-16-17c-6-8-6-20 0-28z" fill="#FF6B81"/>
+        </g>
+      </svg>
+    </div>
+
+  </div>
+
+  <script>
+    const heartsWrap = document.getElementById('hearts');
+    const btnLove = document.getElementById('btn-love');
+    const btnMusic = document.getElementById('btn-music');
+    const btnNext = document.getElementById('btn-next');
+    const avatarImg = document.querySelector('#avatar img');
+    const miniImg = document.getElementById('mini');
+
+    const photos = [
+      'https://drive.google.com/uc?export=view&id=1ywj5W3qwyMeLEn5bjNN5LUUvNGOqQJ68',
+      'https://drive.google.com/uc?export=view&id=1rLDhuk0_brRPij4nlzaB5mjOjdXCC1HR',
+      'https://drive.google.com/uc?export=view&id=1RRL_R3kXWi9voW-JuXIEblIMFCG5eQM6'
+    ];
+    let currentPhoto = 0;
+
+    function spawnHeart(xOffset=0){
+      const el = document.createElement('div');
+      el.className = 'heart';
+      el.style.left = `${xOffset}px`;
+      el.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="url(#g)" d="M12 21s-7.5-4.35-9.5-7.2C-0.6 10.9 3.6 4 8.7 6.2 10.9 7.3 12 9.7 12 9.7s1.1-2.4 3.3-3.5c5.1-2.2 9.3 4.7 6.2 7.6C19.5 16.65 12 21 12 21z" /><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0%" stop-color="#FF6B81" /><stop offset="100%" stop-color="#FFB4C6" /></linearGradient></defs></svg>`;
+      heartsWrap.appendChild(el);
+      const drift = (Math.random()*60) - 30;
+      el.style.transform = `translateX(${drift}px)`;
+      el.style.animation = `floatUp ${1.6 + Math.random()*0.6}s ease-out forwards`;
+      setTimeout(()=> el.remove(), 2200);
+    }
+
+    btnLove.addEventListener('click', ()=>{
+      for(let i=0;i<5;i++){ setTimeout(()=> spawnHeart(i*6), i*80); }
+    });
+
+    btnNext.addEventListener('click', ()=>{
+      avatarImg.style.opacity = 0;
+      miniImg.style.opacity = 0;
+      currentPhoto = (currentPhoto + 1) % photos.length;
+      setTimeout(()=>{
+        avatarImg.src = photos[currentPhoto];
+        miniImg.src = photos[currentPhoto];
+        avatarImg.style.opacity = 1;
+        miniImg.style.opacity = 1;
+      }, 400);
+    });
+
+    let audioYT;
+    btnMusic.addEventListener('click', ()=>{
+      if(!audioYT){
+        audioYT = document.createElement('iframe');
+        audioYT.src = 'https://www.youtube.com/embed/gvunApwKIiY?start=86&end=110&autoplay=1&loop=1&playlist=gvunApwKIiY';
+        audioYT.style.display = 'none';
+        document.body.appendChild(audioYT);
+      }
+    });
+  </script>
+</body>
+</html>
